@@ -1,23 +1,23 @@
-import { Component } from '@angular/core';
-
-export class Hero {
-  id: number;
-  name: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { Hero } from './hero';
+import { HeroService } from './hero.service';
 
 @Component({
-  selector: 'my-app',
-  template: `
+    selector: 'my-app',
+    template: `
     <h1>{{title}}</h1>
     <h2>My Heroes</h2>
-    <ul>
-      <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span>{{hero.name}}
+    <ul class="heroes">
+      <li *ngFor="let hero of heroes" 
+          [class.selected]="hero === selectedHero"
+          (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-    
+    <hero-detail [hero]="selectedHero"></hero-detail>
     `,
-   styles: [`
+    providers:[HeroService],
+    styles:  [`
     .selected {
       background-color: #CFD8DC !important;
       color: white;
@@ -67,20 +67,26 @@ export class Hero {
     }
   `]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private heroService: HeroService) { }
   title = 'Tour of Heroes';
- 
-  heroes = HEROES;
+  heroes : Hero[];
   selectedHero: Hero;
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
-    //console.log(this.selectedHero);
+  };
+  getHeroes(): void {
+    // line below is used to receive heroes from service instanteneously with no delay on remote server end. 
+    //this.heroes = this.heroService.getHeroes();
+
+    // PROMISE based reponse receive and callback
+
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+
+  };
+  ngOnInit(): void {
+    this.getHeroes()
   }
+  
 } 
 
-const HEROES: Hero[] = [
-  {id: 11, name: 'Ehan'},
-  {id: 12, name: 'Chintu'},
-  {id: 13, name: 'Shinu'},
-  {id: 14, name:'Minu'},
-  {id: 15, name:'Chinta'}];
