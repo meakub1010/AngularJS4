@@ -69,4 +69,17 @@ export class HeroService {
 
     // HTTP version of getHero(id: number): Promise<Hero>  ends here 
 
+    // UPDATE 
+
+    private headers = new Headers({'Content-Type':'application/json'});
+
+    update(hero: Hero): Promise<Hero>{
+        const url = `${this.heroesUrl}/${hero.id}`;
+        return this.http.put(url, JSON.stringify(hero), this.headers )
+        .toPromise()
+        .then(() => hero)
+        .catch(this.handleError);
+    }
+
+
 }

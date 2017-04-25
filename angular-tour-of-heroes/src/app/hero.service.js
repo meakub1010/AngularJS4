@@ -32,6 +32,9 @@ var HeroService = (function () {
    */
         // modified version of getHeroes() to fetch data through HTTP
         this.heroesUrl = 'api/heroes';
+        // HTTP version of getHero(id: number): Promise<Hero>  ends here 
+        // UPDATE 
+        this.headers = new Headers({ 'Content-Type': 'application/json' });
     }
     HeroService.prototype.getHeroes = function () {
         return this.http.get(this.heroesUrl)
@@ -58,6 +61,13 @@ var HeroService = (function () {
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError); // handle error defined earlier
+    };
+    HeroService.prototype.update = function (hero) {
+        var url = this.heroesUrl + "/" + hero.id;
+        return this.http.put(url, JSON.stringify(hero), this.headers)
+            .toPromise()
+            .then(function () { return hero; })
+            .catch(this.handleError);
     };
     return HeroService;
 }());
