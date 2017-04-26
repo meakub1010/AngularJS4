@@ -69,7 +69,7 @@ export class HeroService {
 
     // UPDATE 
 
-    private headers = new Headers({'Content-Type':'application/json'});
+    private headers = new Headers({'Content-Type':'application/json'}); // must import headers from http module
 
     update(hero: Hero): Promise<Hero>{
         const url = `${this.heroesUrl}/${hero.id}`;
@@ -84,6 +84,16 @@ export class HeroService {
         .toPromise()
         .then(res => res.json().data as Hero)
         .catch(this.handleError)
+    }
+
+
+    delete(id: number): Promise<void>{
+        const url = `${this.heroesUrl}/${id}`;
+
+        return this.http.delete(url, {headers: this.headers})
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
     }
 
 

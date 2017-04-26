@@ -56,6 +56,13 @@ import { HeroService } from './hero.service';
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
+    button.delete {
+    float:right;
+    margin-top: 2px;
+    margin-right: .8em;
+    background-color: gray !important;
+    color:white;
+}
   `]
 })
 export class HeroesComponent implements OnInit {
@@ -93,6 +100,20 @@ export class HeroesComponent implements OnInit {
       this.heroes.push(hero);
       this.selectedHero = null;
     })
+  }
+
+  delete(hero: Hero) : void{
+    if (!hero) { return; }
+    // deleta method in hero service.
+
+    this.heroService.delete(hero.id)
+        .then(() => {
+          this.heroes = this.heroes.filter(h => h !== hero)
+
+          if (this.selectedHero === hero) {
+            this.selectedHero = null;
+          }
+        });
   }
 
   ngOnInit(): void {
