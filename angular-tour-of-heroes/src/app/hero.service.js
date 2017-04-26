@@ -34,7 +34,7 @@ var HeroService = (function () {
         this.heroesUrl = 'api/heroes';
         // HTTP version of getHero(id: number): Promise<Hero>  ends here 
         // UPDATE 
-        this.headers = new Headers({ 'Content-Type': 'application/json' });
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     HeroService.prototype.getHeroes = function () {
         return this.http.get(this.heroesUrl)
@@ -64,13 +64,13 @@ var HeroService = (function () {
     };
     HeroService.prototype.update = function (hero) {
         var url = this.heroesUrl + "/" + hero.id;
-        return this.http.put(url, JSON.stringify(hero), this.headers)
+        return this.http.put(url, JSON.stringify(hero), { headers: this.headers })
             .toPromise()
             .then(function () { return hero; })
             .catch(this.handleError);
     };
     HeroService.prototype.create = function (name) {
-        return this.http.post(this.heroesUrl, JSON.stringify({ name: name }), this.headers)
+        return this.http.post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json().data; })
             .catch(this.handleError);
