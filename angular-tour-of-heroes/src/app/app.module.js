@@ -28,6 +28,7 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
+        // imports - these are the modules whose export classes are required in this module 
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
@@ -35,6 +36,7 @@ AppModule = __decorate([
             angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService),
             app_routing_module_1.AppRoutingModule,
         ],
+        // declarations - contain the view classes that belong to this module
         declarations: [
             app_component_1.AppComponent,
             dashboard_component_1.DashboardComponent,
@@ -42,7 +44,9 @@ AppModule = __decorate([
             hero_detail_component_1.HeroDetailComponent,
             hero_search_component_1.HeroSearchComponent
         ],
+        // providers - creates services that eventually become accessible in all parts of the application
         providers: [hero_service_1.HeroService],
+        // bootstrap - main application view call the root component. ONLY the ROUTE MODULE SHOULD SET this bootstrap property.
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
