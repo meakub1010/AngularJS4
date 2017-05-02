@@ -47,7 +47,7 @@ AppModule = __decorate([
         // providers - creates services that eventually become accessible in all parts of the application
         providers: [hero_service_1.HeroService],
         // bootstrap - main application view call the root component. ONLY the ROUTE MODULE SHOULD SET this bootstrap property.
-        bootstrap: [app_component_1.AppComponent]
+        bootstrap: [app_component_1.AppComponent] // this it the root component that angular creates and inserts in index.html
     })
 ], AppModule);
 exports.AppModule = AppModule;

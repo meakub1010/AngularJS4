@@ -39,7 +39,7 @@ import { HeroService } from './hero.service';
   // providers - creates services that eventually become accessible in all parts of the application
   providers:[ HeroService ],
   // bootstrap - main application view call the root component. ONLY the ROUTE MODULE SHOULD SET this bootstrap property.
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ] // this it the root component that angular creates and inserts in index.html
 })
 
 
