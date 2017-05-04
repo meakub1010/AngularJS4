@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers } from "@angular/http";
+import { Injectable, OnInit } from '@angular/core';
+import { Http, Headers} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
 
-import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+import { Hero, Item } from './hero';
+import { HEROES, CURRENTITEMS } from './mock-heroes';
 
 @Injectable()
 export class HeroService {
@@ -73,7 +73,7 @@ export class HeroService {
 
     update(hero: Hero): Promise<Hero>{
         const url = `${this.heroesUrl}/${hero.id}`;
-        return this.http.put(url, JSON.stringify(hero), {headers: this.headers})
+        return this.http.put(url, JSON.stringify(hero), { headers: this.headers})
         .toPromise()
         .then(() => hero)
         .catch(this.handleError);
@@ -96,5 +96,39 @@ export class HeroService {
             .catch(this.handleError);
     }
 
+
+}
+
+@Injectable()
+export class Items implements Iterable<Item>{
+    currentItems: Item[] = [];
+
+  [Symbol.iterator]() {
+    return this.currentItems.values();
+  }
+
+  canAdd() {
+return this.currentItems.length < CURRENTITEMS.length;
+  }
+
+  canRemove() {
+    return this.currentItems.length > 0;
+  }
+
+  addActive() {
+    let item = CURRENTITEMS[this.currentItems.length];
+    item.state = 'active';
+    this.currentItems.push(item);
+  }
+
+  addInactive() {
+    let item = CURRENTITEMS[this.currentItems.length];
+    item.state = 'inactive';
+    this.currentItems.push(item);
+  }
+
+  remove() {
+    this.currentItems.splice(this.currentItems.length - 1, 1);
+  }
 
 }
