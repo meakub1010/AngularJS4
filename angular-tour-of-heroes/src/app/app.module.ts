@@ -1,5 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // required for animation
 import { FormsModule }   from '@angular/forms'; // <-- NgModel lives here
 import { HttpModule } from '@angular/http';
 
@@ -19,10 +20,13 @@ import { HeroSearchComponent }  from './hero-search.component';
 import { DashboardComponent } from './dashboard.component';
 import { HeroService } from './hero.service';
 
+import { ItemListBasicComponent }  from './hero-list-basic.component';
+
 @NgModule({
   // imports - these are the modules whose export classes are required in this module 
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
@@ -34,7 +38,8 @@ import { HeroService } from './hero.service';
     DashboardComponent,
     HeroesComponent,
     HeroDetailComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    ItemListBasicComponent
   ],
   // providers - creates services that eventually become accessible in all parts of the application
   providers:[ HeroService ],
