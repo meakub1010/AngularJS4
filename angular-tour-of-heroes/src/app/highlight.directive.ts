@@ -17,13 +17,20 @@ export class HighlightDirective {
     }
 
     @HostListener('mouseenter') onMouseEnter() {
-        this.highlight('red');
+         this.highlight(this.highlightColor || this.defaultColor || 'red');
+         console.log(this.defaultColor);
     }
 
     @HostListener('mouseleave') onmouseleave() {
-        this.highlight('black');
+        this.highlight(this.highlightColor);
     }
     
+   // @Input() highlightColor: string;
+
+     @Input('myHighlight') highlightColor : string;
+
+     @Input() defaultColor: string;
+
     private highlight(color: string){
           this.el.nativeElement.style.color = color;
     }
