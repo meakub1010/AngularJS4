@@ -3,7 +3,7 @@
 
 import { Directive, ElementRef, Input } from '@angular/core';
 
-class HighlightDirective {
+export class HighlightDirective {
     constructor(el: ElementRef){
         el.nativeElement.style.color = 'red';
     }

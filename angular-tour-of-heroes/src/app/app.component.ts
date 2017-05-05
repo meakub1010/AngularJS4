@@ -9,7 +9,10 @@ import { Component } from '@angular/core';
             <a routerLink="/heroes" routerLinkActive="active" >Heroes</a>
             <a routerLink="/items" routerLinkActive="active" >Items</a>
         </nav>
+        <p myHighlight> Colored text through directive !! </p>
         <router-outlet></router-outlet>
+
+
     `
 })
 

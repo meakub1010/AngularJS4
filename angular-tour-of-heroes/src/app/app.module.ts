@@ -22,6 +22,9 @@ import { HeroService } from './hero.service';
 
 import { ItemListBasicComponent }  from './hero-list-basic.component';
 
+import { HighlightDirective } from './highlight.directive';
+
+
 @NgModule({
   // imports - these are the modules whose export classes are required in this module 
   imports: [
@@ -39,7 +42,8 @@ import { ItemListBasicComponent }  from './hero-list-basic.component';
     HeroesComponent,
     HeroDetailComponent,
     HeroSearchComponent,
-    ItemListBasicComponent
+    ItemListBasicComponent,
+    HighlightDirective
   ],
   // providers - creates services that eventually become accessible in all parts of the application
   providers:[ HeroService ],
@@ -49,5 +53,5 @@ import { ItemListBasicComponent }  from './hero-list-basic.component';
 
 
 export class AppModule { 
-
+  
 }
